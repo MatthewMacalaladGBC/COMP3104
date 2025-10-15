@@ -22,11 +22,28 @@ fi
 Ensures that code is linted before committing.
 File: .git/hooks/pre-commit
 ```
-# !/bin/sh
+#!/bin/sh
 echo "Running pre-commit hook: Linting code..."
 node --version
 #  npm run lint
 if [ $? -ne 0 ]; then
   echo "Linting failed. Fix errors before committing."
   exit 1
+fi
 ```
+
+# Pre-Push Hook (Run Tests Before Push)
+Ensures that tests are run before pushing.
+File: .git/hooks/pre-push
+```
+#!/bin/sh
+echo "Running pre-push hook: Running tests..."
+npm test
+if [ $? -ne 0 ]; then
+  echo "Tests failed! Fix them before pushing."
+  exit 1
+fi
+```
+
+**Note that the hooks listed above are examples done in the lab, and not related to the lab exercise.**
+*All hook files will be made sample files again after examples are finished*
